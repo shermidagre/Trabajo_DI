@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Guía: Tu Propio Proyecto Sphinx Desde Cero &#8212; documentación de Proyecto de Documentación</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=9c9b61ad"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/translations.js?v=f85f4cfb"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Configuración y Archivos del Proyecto" href="02_configuracion_y_archivos.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="guia-tu-propio-proyecto-sphinx-desde-cero">
+<span id="guia-desde-cero"></span><h1>Guía: Tu Propio Proyecto Sphinx Desde Cero<a class="headerlink" href="#guia-tu-propio-proyecto-sphinx-desde-cero" title="Link to this heading">¶</a></h1>
+<p>Sigue estos pasos para replicar un proyecto de documentación con Sphinx desde cero.</p>
+<section id="paso-1-preparacion-del-entorno">
+<h2><strong>Paso 1: Preparación del Entorno</strong><a class="headerlink" href="#paso-1-preparacion-del-entorno" title="Link to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Crea una carpeta para tu proyecto principal.</p></li>
+<li><p>Dentro, crea y activa un entorno virtual de Python:
+.. code-block:: shell</p>
+<blockquote>
+<div><p>python -m venv .venv
+.venvScriptsactivate</p>
+</div></blockquote>
+</li>
+<li><p>Crea las carpetas para el código fuente y la documentación:
+.. code-block:: powershell</p>
+<blockquote>
+<div><p>mkdir src docs # Puedes llamar a la de documentación como “docs” o <a class="reference external" href="mailto:'&#37;&#52;&#48;Documentacion">“<span>&#64;</span>Documentacion</a>”</p>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="paso-2-instalar-sphinx">
+<h2><strong>Paso 2: Instalar Sphinx</strong><a class="headerlink" href="#paso-2-instalar-sphinx" title="Link to this heading">¶</a></h2>
+<p>Con el entorno virtual activado, instala Sphinx:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx
+</pre></div>
+</div>
+</section>
+<section id="paso-3-iniciar-el-proyecto-sphinx">
+<h2><strong>Paso 3: Iniciar el Proyecto Sphinx</strong><a class="headerlink" href="#paso-3-iniciar-el-proyecto-sphinx" title="Link to this heading">¶</a></h2>
+<p>Navega a la carpeta de documentación (ej: <code class="docutils literal notranslate"><span class="pre">docs</span></code>) y ejecuta el asistente:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs
+sphinx-quickstart
+</pre></div>
+</div>
+<p>Responde a las preguntas del asistente:
+-   <code class="docutils literal notranslate"><span class="pre">Separate</span> <span class="pre">source</span> <span class="pre">and</span> <span class="pre">build</span> <span class="pre">directories</span> <span class="pre">(y/n)</span> <span class="pre">[y]</span></code>: Pulsa Enter.
+-   <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">name</span></code>: Nombre de tu proyecto.
+-   <code class="docutils literal notranslate"><span class="pre">Author</span> <span class="pre">name(s)</span></code>: Tu nombre.
+-   <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">release</span> <span class="pre">[]</span></code>: Versión (ej: 0.0.1).
+-   <code class="docutils literal notranslate"><span class="pre">Project</span> <span class="pre">language</span> <span class="pre">[en]</span></code>: Escribe <cite>es</cite> para español.</p>
+</section>
+<section id="paso-4-escribir-codigo-para-documentar">
+<h2><strong>Paso 4: Escribir Código para Documentar</strong><a class="headerlink" href="#paso-4-escribir-codigo-para-documentar" title="Link to this heading">¶</a></h2>
+<p>En tu carpeta <code class="docutils literal notranslate"><span class="pre">src</span></code>, crea un paquete de Python (ej: <code class="docutils literal notranslate"><span class="pre">src/mi_paquete/</span></code>). Añade funciones/clases con «docstrings» claros.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># src/mi_paquete/saludos.py</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">hola_mundo</span><span class="p">(</span><span class="n">nombre</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saluda a la persona indicada.</span>
+
+<span class="sd">    :param nombre: El nombre de la persona a saludar.</span>
+<span class="sd">    :type nombre: str</span>
+<span class="sd">    :return: Un saludo en formato string.</span>
+<span class="sd">    :rtype: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;¡Hola, </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">!&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="paso-5-configurar-conf-py">
+<h2><strong>Paso 5: Configurar `conf.py`</strong><a class="headerlink" href="#paso-5-configurar-conf-py" title="Link to this heading">¶</a></h2>
+<p>Edita <code class="docutils literal notranslate"><span class="pre">docs/source/conf.py</span></code>:
+1.  <strong>Añadir ruta a `src`</strong>: Al principio, descomenta <cite>import os</cite> y <cite>sys</cite>, y añade la ruta absoluta a tu carpeta <cite>src</cite>.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="c1"># Asegúrate que la ruta es correcta para tu proyecto</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;C:/ruta/absoluta/a/tu/proyecto/src&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Activar Extensiones</strong>: Añade <cite>sphinx.ext.autodoc</cite>, <cite>sphinx.ext.napoleon</cite>, <cite>sphinx.ext.viewcode</cite> a la lista <cite>extensions</cite>.</p></li>
+</ol>
+</section>
+<section id="paso-6-crear-contenido-rst">
+<h2><strong>Paso 6: Crear Contenido `.rst`</strong><a class="headerlink" href="#paso-6-crear-contenido-rst" title="Link to this heading">¶</a></h2>
+<p>Dentro de <code class="docutils literal notranslate"><span class="pre">docs/source/</span></code>, crea ficheros <cite>.rst</cite> (ej: <cite>api.rst</cite>). Usa directivas como <cite>.. automodule::</cite> para documentar código.</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="gh">API de Saludos</span>
+<span class="gh">==============</span>
+
+<span class="p">..</span> <span class="ow">automodule</span><span class="p">::</span> mi_paquete.saludos
+   <span class="nc">:members:</span>
+</pre></div>
+</div>
+</section>
+<section id="paso-7-enlazar-en-index-rst">
+<h2><strong>Paso 7: Enlazar en `index.rst`</strong><a class="headerlink" href="#paso-7-enlazar-en-index-rst" title="Link to this heading">¶</a></h2>
+<p>En <code class="docutils literal notranslate"><span class="pre">docs/source/index.rst</span></code>, actualiza <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">toctree::</span></code> para incluir tus nuevos ficheros.</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
+   <span class="nc">:maxdepth:</span> 2
+   <span class="nc">:caption:</span> Contenidos:
+
+   tutorial
+   api
+</pre></div>
+</div>
+</section>
+<section id="paso-8-compilar-la-documentacion">
+<h2><strong>Paso 8: Compilar la Documentación</strong><a class="headerlink" href="#paso-8-compilar-la-documentacion" title="Link to this heading">¶</a></h2>
+<p>Desde la carpeta <code class="docutils literal notranslate"><span class="pre">docs/</span></code> (la que contiene <cite>conf.py</cite>, <cite>index.rst</cite>, etc.), ejecuta:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>html
+</pre></div>
+</div>
+<p>¡Listo! Abre <code class="docutils literal notranslate"><span class="pre">docs/build/html/index.html</span></code> en tu navegador para ver el resultado.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Proyecto de Documentación Gemini</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navegación</h3>
+<p class="caption" role="heading"><span class="caption-text">Documentación Principal:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial Básico de reStructuredText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">Referencia de la API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guías de Ayuda:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_comandos_usados.html">Comandos Utilizados para la Configuración</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_configuracion_y_archivos.html">Configuración y Archivos del Proyecto</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guía: Tu Propio Proyecto Sphinx Desde Cero</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#paso-1-preparacion-del-entorno"><strong>Paso 1: Preparación del Entorno</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paso-2-instalar-sphinx"><strong>Paso 2: Instalar Sphinx</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paso-3-iniciar-el-proyecto-sphinx"><strong>Paso 3: Iniciar el Proyecto Sphinx</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paso-4-escribir-codigo-para-documentar"><strong>Paso 4: Escribir Código para Documentar</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paso-5-configurar-conf-py"><strong>Paso 5: Configurar `conf.py`</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paso-6-crear-contenido-rst"><strong>Paso 6: Crear Contenido `.rst`</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paso-7-enlazar-en-index-rst"><strong>Paso 7: Enlazar en `index.rst`</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#paso-8-compilar-la-documentacion"><strong>Paso 8: Compilar la Documentación</strong></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="02_configuracion_y_archivos.html" title="capítulo anterior">Configuración y Archivos del Proyecto</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Gemini CLI.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/guias/03_guia_desde_cero.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
