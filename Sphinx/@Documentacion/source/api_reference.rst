@@ -1,11 +1,17 @@
-.. _api_reference:
-
 Referencia de la API
-=====================
+===================
 
-Esta sección contiene la documentación generada automáticamente a partir de los "docstrings" de tu código fuente Python.
+.. automodule:: mi_libreria.conexionBD
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-.. automodule:: mi_libreria.calculadora
+.. automodule:: gui.main_window
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: gui.form_dialog
    :members:
    :undoc-members:
    :show-inheritance:

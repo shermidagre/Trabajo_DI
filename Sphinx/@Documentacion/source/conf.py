@@ -7,7 +7,8 @@ import os
 import sys
 # Añadir la ruta absoluta a la carpeta 'src' para que Sphinx pueda encontrar el código.
 # La carpeta 'src' está en la raíz del proyecto, un nivel por encima de '@Documentacion\source'.
-sys.path.insert(0, 'C:\\Users\\samue\\Documents\\dam2\\DI-VARIOS_\\Random\\Sphinx\\src')
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'src')))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information

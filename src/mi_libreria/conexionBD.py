@@ -101,7 +101,7 @@ class ConexionBD:
         A consulta ten que estar definida con '?' na clausula where de SQL.
 
         :param consultaSQL. Código da consulta sql a executar
-        :param *parametros. Parámetros para introducir na consulta
+        :param \*parametros. Parámetros para introducir na consulta
         :return listaConsulta
 
         """
