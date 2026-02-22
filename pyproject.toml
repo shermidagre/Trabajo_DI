@@ -12,6 +12,10 @@ dependencies = [
      "PyGObject",
 ]
 
+[project.urls]
+"Homepage" = "https://github.com/shermidagre/Trabajo_DI"
+"Documentation" = "https://gestor-inventario.readthedocs.io/"
+
 [project.scripts]
 xestor-inventario = "gestor_inventario.main:iniciar"
 
