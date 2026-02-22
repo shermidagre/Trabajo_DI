@@ -1,11 +1,11 @@
-Documentación do Xestor de Inventario
-=====================================
+Documentación del Gestor de Inventario
+======================================
 
-Benvido/a á documentación oficial do Xestor de Inventario. Unha aplicación de escritorio desenvolvida en Python utilizando GTK3 para a interface gráfica e SQLite para a persistencia de datos.
+Bienvenido/a a la documentación oficial del Gestor de Inventario. Una aplicación de escritorio desarrollada en Python utilizando GTK3 para la interfaz gráfica y SQLite para la persistencia de datos.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contidos Principais:
+   :caption: Contenidos Principales:
 
    api_reference
    guias/01_instalacion_y_uso

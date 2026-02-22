@@ -2,7 +2,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from gestor_inventario.gui.form_dialog import FormDialog
+from gestor_inventario.gui.dialogoFormulario import DialogoFormulario
 
 
 # Mock para Gtk.Entry
@@ -45,7 +45,7 @@ class TestFormDialogValidation(unittest.TestCase):
         mock_parent = MagicMock()
 
         # Creamos una instancia de FormDialog con un producto nulo para "Add" mode
-        self.dialog = FormDialog(parent=mock_parent, producto=None)
+        self.dialog = DialogoFormulario(parent=mock_parent, producto=None)
         
         # Reemplazamos los widgets Gtk reales con nuestros mocks
         self.dialog.txt_nombre = MockEntry()
@@ -116,7 +116,7 @@ class TestFormDialogValidation(unittest.TestCase):
         
         # Volvemos a instanciar el diálogo en modo edición
         mock_parent = MagicMock()
-        dialog_edit = FormDialog(parent=mock_parent, producto=producto_data)
+        dialog_edit = DialogoFormulario(parent=mock_parent, producto=producto_data)
         
         # Aseguramos que los mocks estén en su lugar para la validación
         dialog_edit.txt_nombre = MockEntry(text=producto_data[1])

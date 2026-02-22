@@ -4,7 +4,7 @@ import os
 import sqlite3
 
 from gestor_inventario.mi_libreria.conexionBD import ConexionBD
-from gestor_inventario.database_setup import setup_database
+from gestor_inventario.configuracionBD import configurarBaseDatos
 
 
 class TestConexionBD(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestConexionBD(unittest.TestCase):
         """
         if os.path.exists(self.DB_NAME):
             os.remove(self.DB_NAME)
-        setup_database(self.DB_NAME) # Usamos la función de setup para crear la tabla
+        configurarBaseDatos(self.DB_NAME) # Usamos la función de setup para crear la tabla
 
     def tearDown(self):
         """

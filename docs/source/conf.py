@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Xestor de Inventario'
+project = 'Gestor de Inventario'
 copyright = '2026, Samuel'
 author = 'Samuel'
 version = '1.0'

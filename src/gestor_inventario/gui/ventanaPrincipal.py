@@ -3,9 +3,10 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-from gestorInventario.miLibreria.conexionBD import ConexionBD
-from gestorInventario.gui.dialogoFormulario import DialogoFormulario
-from gestorInventario.utilidades import obtenerRutaBaseDatos
+from gestor_inventario.bd.conexionBD import ConexionBD
+from gestor_inventario.gui.dialogoFormulario import DialogoFormulario
+from gestor_inventario.gui.ventanaCategorias import VentanaCategorias
+from gestor_inventario.utils import obtenerRutaBaseDatos
 
 
 class VentanaPrincipal(Gtk.Window):
@@ -13,36 +14,43 @@ class VentanaPrincipal(Gtk.Window):
 
     def __init__(self):
         super().__init__(title="Gestor de Inventario")
-        self.set_default_size(800, 600)
+        self.set_default_size(850, 600)
         self.set_border_width(10)
 
         # Contenedor principal
         cajaVertical = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.add(cajaVertical)
 
-        # Etiqueta de título
+        # Cabecera con título y botón de categorías
+        cajaCabecera = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         etiquetaTitulo = Gtk.Label()
         etiquetaTitulo.set_markup("<big><b>Gestor de Inventario</b></big>")
-        cajaVertical.pack_start(etiquetaTitulo, False, True, 0)
+        cajaCabecera.pack_start(etiquetaTitulo, False, False, 0)
 
-        # Vista de árbol para mostrar los productos
-        self.modeloLista = Gtk.ListStore(int, str, str, int, float)
+        # Nuevo botón para la tercera ventana (Requisito del proyecto)
+        self.botonCategorias = Gtk.Button(label="Gestionar Categorías")
+        self.botonCategorias.connect("clicked", self.alHacerClicCategorias)
+        cajaCabecera.pack_end(self.botonCategorias, False, False, 0)
+
+        cajaVertical.pack_start(cajaCabecera, False, True, 0)
+
+        # Vista de árbol (TreeView) para mostrar los productos
+        # Estructura: id, nombre, descripcion, cantidad, precio, categoria_id, es_nuevo, en_stock
+        self.modeloLista = Gtk.ListStore(int, str, str, int, float, int, int, int)
         self.vistaArbol = Gtk.TreeView(model=self.modeloLista)
 
-        # Columnas explícitas
         renderizadorTexto = Gtk.CellRendererText()
+        renderizadorToggle = Gtk.CellRendererToggle()  # Para mostrar el stock visualmente
 
-        columnaId = Gtk.TreeViewColumn("ID", renderizadorTexto, text=0)
-        self.vistaArbol.append_column(columnaId)
+        # Añadimos solo las columnas más importantes a la vista (aunque el modelo guarda todo)
+        self.vistaArbol.append_column(Gtk.TreeViewColumn("ID", renderizadorTexto, text=0))
+        self.vistaArbol.append_column(Gtk.TreeViewColumn("Nombre", renderizadorTexto, text=1))
+        self.vistaArbol.append_column(Gtk.TreeViewColumn("Cantidad", renderizadorTexto, text=3))
+        self.vistaArbol.append_column(Gtk.TreeViewColumn("Precio (€)", renderizadorTexto, text=4))
 
-        columnaNombre = Gtk.TreeViewColumn("Nombre", renderizadorTexto, text=1)
-        self.vistaArbol.append_column(columnaNombre)
-
-        columnaCantidad = Gtk.TreeViewColumn("Cantidad", renderizadorTexto, text=3)
-        self.vistaArbol.append_column(columnaCantidad)
-
-        columnaPrecio = Gtk.TreeViewColumn("Precio", renderizadorTexto, text=4)
-        self.vistaArbol.append_column(columnaPrecio)
+        # Columna visual para el CheckButton (en_stock)
+        columnaStock = Gtk.TreeViewColumn("En Stock", renderizadorToggle, active=7)
+        self.vistaArbol.append_column(columnaStock)
 
         seleccionActual = self.vistaArbol.get_selection()
         seleccionActual.connect("changed", self.alCambiarSeleccion)
@@ -53,17 +61,19 @@ class VentanaPrincipal(Gtk.Window):
         ventanaDesplazable.add(self.vistaArbol)
         cajaVertical.pack_start(ventanaDesplazable, True, True, 0)
 
-        # Caja para los botones
+        # Caja para los botones de operaciones CRUD
         cajaBotones = Gtk.Box(spacing=6)
         cajaVertical.pack_start(cajaBotones, False, True, 0)
 
-        self.botonAñadir = Gtk.Button(label="Añadir")
+        self.botonAñadir = Gtk.Button(label="Añadir Producto")
+        self.botonAñadir.get_style_context().add_class("boton-exito")
         self.botonAñadir.connect("clicked", self.alHacerClicAñadir)
 
-        self.botonEditar = Gtk.Button(label="Editar")
+        self.botonEditar = Gtk.Button(label="Editar Producto")
         self.botonEditar.connect("clicked", self.alHacerClicEditar)
 
-        self.botonEliminar = Gtk.Button(label="Eliminar")
+        self.botonEliminar = Gtk.Button(label="Eliminar Producto")
+        self.botonEliminar.get_style_context().add_class("boton-peligro")
         self.botonEliminar.connect("clicked", self.alHacerClicEliminar)
 
         cajaBotones.pack_start(self.botonAñadir, True, True, 0)
@@ -77,14 +87,20 @@ class VentanaPrincipal(Gtk.Window):
         self.cargarDatos()
 
     def cargarDatos(self):
+        """Lee los registros de la base de datos y los carga en el TreeView."""
         self.modeloLista.clear()
         conexionBaseDatos = None
         try:
             conexionBaseDatos = ConexionBD(obtenerRutaBaseDatos())
             conexionBaseDatos.conectarBaseDatos()
             conexionBaseDatos.crearCursor()
-            listaProductos = conexionBaseDatos.consultaSinParametros(
-                "SELECT id, nombre, descripcion, cantidad, precio FROM productos")
+            # Ahora pedimos las 8 columnas para rellenar todo el modelo
+            consultaSql = """
+                SELECT id, nombre, descripcion, cantidad, precio, 
+                       categoria_id, es_nuevo, en_stock 
+                FROM productos
+            """
+            listaProductos = conexionBaseDatos.consultaSinParametros(consultaSql)
             if listaProductos:
                 for productoActual in listaProductos:
                     self.modeloLista.append(list(productoActual))
@@ -94,9 +110,16 @@ class VentanaPrincipal(Gtk.Window):
             if conexionBaseDatos:
                 conexionBaseDatos.cerrarBaseDatos()
 
+    def alHacerClicCategorias(self, componenteBoton):
+        """Abre la tercera ventana obligatoria para gestionar categorías."""
+        ventanaCat = VentanaCategorias(ventanaPadre=self)
+        # No hace falta procesar la respuesta, la ventana se gestiona sola.
+
     def alHacerClicAñadir(self, componenteBoton):
+        """Abre el diálogo para añadir un nuevo producto con todas las opciones."""
         dialogoFormulario = DialogoFormulario(ventanaPadre=self)
         respuestaDialogo = dialogoFormulario.run()
+
         if respuestaDialogo == Gtk.ResponseType.OK and dialogoFormulario.validarDatos():
             datosFormulario = dialogoFormulario.obtenerDatos()
             conexionBaseDatos = None
@@ -104,9 +127,17 @@ class VentanaPrincipal(Gtk.Window):
                 conexionBaseDatos = ConexionBD(obtenerRutaBaseDatos())
                 conexionBaseDatos.conectarBaseDatos()
                 conexionBaseDatos.crearCursor()
-                consultaSql = "INSERT INTO productos (nombre, descripcion, cantidad, precio) VALUES (?, ?, ?, ?)"
-                parametrosConsulta = (datosFormulario["nombre"], datosFormulario["descripcion"],
-                                      datosFormulario["cantidad"], datosFormulario["precio"])
+                consultaSql = """
+                    INSERT INTO productos 
+                    (nombre, descripcion, cantidad, precio, categoria_id, es_nuevo, en_stock) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """
+                parametrosConsulta = (
+                    datosFormulario["nombre"], datosFormulario["descripcion"],
+                    datosFormulario["cantidad"], datosFormulario["precio"],
+                    datosFormulario["categoria_id"], datosFormulario["es_nuevo"],
+                    datosFormulario["en_stock"]
+                )
                 conexionBaseDatos.añadirRegistro(consultaSql, *parametrosConsulta)
                 self.cargarDatos()
             except Exception as errorAñadir:
@@ -117,6 +148,7 @@ class VentanaPrincipal(Gtk.Window):
         dialogoFormulario.destroy()
 
     def alHacerClicEditar(self, componenteBoton):
+        """Abre el diálogo con los datos pre-cargados para editarlos."""
         modeloDatos, iteradorArbol = self.vistaArbol.get_selection().get_selected()
         if iteradorArbol is None:
             return
@@ -133,9 +165,18 @@ class VentanaPrincipal(Gtk.Window):
                 conexionBaseDatos = ConexionBD(obtenerRutaBaseDatos())
                 conexionBaseDatos.conectarBaseDatos()
                 conexionBaseDatos.crearCursor()
-                consultaSql = "UPDATE productos SET nombre=?, descripcion=?, cantidad=?, precio=? WHERE id=?"
-                parametrosConsulta = (datosFormulario["nombre"], datosFormulario["descripcion"],
-                                      datosFormulario["cantidad"], datosFormulario["precio"], datosFormulario["id"])
+                consultaSql = """
+                    UPDATE productos 
+                    SET nombre=?, descripcion=?, cantidad=?, precio=?, 
+                        categoria_id=?, es_nuevo=?, en_stock=? 
+                    WHERE id=?
+                """
+                parametrosConsulta = (
+                    datosFormulario["nombre"], datosFormulario["descripcion"],
+                    datosFormulario["cantidad"], datosFormulario["precio"],
+                    datosFormulario["categoria_id"], datosFormulario["es_nuevo"],
+                    datosFormulario["en_stock"], datosFormulario["id"]
+                )
                 conexionBaseDatos.actualizarRegistro(consultaSql, *parametrosConsulta)
                 self.cargarDatos()
             except Exception as errorEditar:
@@ -147,6 +188,7 @@ class VentanaPrincipal(Gtk.Window):
         dialogoFormulario.destroy()
 
     def alHacerClicEliminar(self, componenteBoton):
+        """Pide confirmación y elimina un registro de la base de datos."""
         modeloDatos, iteradorArbol = self.vistaArbol.get_selection().get_selected()
         if iteradorArbol is None:
             return

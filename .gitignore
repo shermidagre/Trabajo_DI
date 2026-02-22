@@ -31,7 +31,7 @@ Thumbs.db
 # ==========================================
 # Secretos y credenciales (¡Súper importante!)
 # ==========================================
-token.txt
+token
 
 # ==========================================
 # Archivos de empaquetado (PyPI)

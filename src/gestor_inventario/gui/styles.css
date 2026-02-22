@@ -1,0 +1,141 @@
+/* =========================================
+   ESTILOS GLOBALES (Ventanas y Diálogos)
+   ========================================= */
+/* Afecta a la ventana principal y a todos los diálogos (formularios emergentes) */
+window, window.dialog {
+    background-color: #f0f2f5;
+    color: #333333;
+}
+
+/* =========================================
+   TEXTOS Y TÍTULOS
+   ========================================= */
+label {
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+/* Título principal de la aplicación */
+label.titulo-app {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2980b9;
+    padding: 10px 0px;
+}
+
+/* =========================================
+   CAMPOS DE TEXTO Y FORMULARIOS
+   ========================================= */
+/* Cajas de texto, áreas multilínea y selectores de números (SpinButtons) */
+entry, textview text, spinbutton {
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 8px;
+    caret-color: #2980b9; /* Color del cursor parpadeante */
+}
+
+/* Efecto cuando el usuario hace clic en un campo de texto para escribir */
+entry:focus, textview text:focus, spinbutton:focus {
+    border: 1px solid #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+}
+
+/* Listas desplegables (ComboBox) */
+combobox window.popup {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+/* RadioButtons y CheckButtons */
+radiobutton, checkbutton {
+    padding: 5px;
+    color: #2c3e50;
+}
+
+/* Cambia el color cuando están marcados */
+radiobutton:checked, checkbutton:checked {
+    color: #2980b9;
+    font-weight: bold;
+}
+
+/* =========================================
+   BOTONES
+   ========================================= */
+/* Botones genéricos (Añadir, Editar, Cancelar...) */
+button {
+    background-color: #34495e;
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 8px 16px;
+    border: none;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+button:hover {
+    background-color: #2c3e50;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:active {
+    background-color: #1a252f;
+}
+
+/* Botón de Acción Positiva (Ej: Guardar, Añadir) */
+button.boton-exito {
+    background-color: #2ecc71;
+}
+
+button.boton-exito:hover {
+    background-color: #27ae60;
+}
+
+/* Botón de Peligro (Ej: Eliminar) */
+button.boton-peligro {
+    background-color: #e74c3c;
+}
+
+button.boton-peligro:hover {
+    background-color: #c0392b;
+}
+
+/* =========================================
+   TABLAS (TreeView)
+   ========================================= */
+treeview {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+}
+
+/* Cabecera de la tabla */
+treeview header button {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid #ced4da;
+    padding: 10px;
+}
+
+treeview header button:hover {
+    background-color: #dde2e6;
+}
+
+/* Fila seleccionada en la tabla */
+treeview row:selected {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+/* =========================================
+   MARCOS Y SEPARADORES
+   ========================================= */
+frame {
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    padding: 2px;
+}
