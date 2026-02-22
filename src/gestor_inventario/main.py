@@ -29,7 +29,7 @@ class App:
         """Carga el archivo estilos.css y lo aplica a toda la aplicación."""
         proveedorCss = Gtk.CssProvider()
         # Buscamos el archivo estilos.css dinámicamente en la carpeta 'gui'
-        rutaCss = os.path.join(os.path.dirname(__file__), "gui", "estilos.css")
+        rutaCss = os.path.join(os.path.dirname(__file__), "gui", "styles.css")
 
         try:
             proveedorCss.load_from_path(rutaCss)
@@ -46,6 +46,10 @@ class App:
             print(f"Advertencia: No se pudo cargar el archivo CSS. {error}")
 
 
-if __name__ == "__main__":
-    aplicacionGestor = Aplicacion()
+def iniciar():
+    """Punto de entrada para el comando de consola."""
+    aplicacionGestor = App()
     Gtk.main()
+
+if __name__ == "__main__":
+    iniciar()

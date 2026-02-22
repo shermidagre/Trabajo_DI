@@ -1,7 +1,6 @@
 /* =========================================
    ESTILOS GLOBALES (Ventanas y Diálogos)
    ========================================= */
-/* Afecta a la ventana principal y a todos los diálogos (formularios emergentes) */
 window, window.dialog {
     background-color: #f0f2f5;
     color: #333333;
@@ -15,7 +14,6 @@ label {
     color: #2c3e50;
 }
 
-/* Título principal de la aplicación */
 label.titulo-app {
     font-size: 26px;
     font-weight: bold;
@@ -26,36 +24,31 @@ label.titulo-app {
 /* =========================================
    CAMPOS DE TEXTO Y FORMULARIOS
    ========================================= */
-/* Cajas de texto, áreas multilínea y selectores de números (SpinButtons) */
 entry, textview text, spinbutton {
     background-color: #ffffff;
     color: #333333;
     border: 1px solid #ced4da;
     border-radius: 6px;
     padding: 8px;
-    caret-color: #2980b9; /* Color del cursor parpadeante */
+    caret-color: #2980b9;
 }
 
-/* Efecto cuando el usuario hace clic en un campo de texto para escribir */
 entry:focus, textview text:focus, spinbutton:focus {
     border: 1px solid #3498db;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
 }
 
-/* Listas desplegables (ComboBox) */
 combobox window.popup {
     background-color: #ffffff;
     border: 1px solid #ced4da;
     border-radius: 4px;
 }
 
-/* RadioButtons y CheckButtons */
 radiobutton, checkbutton {
     padding: 5px;
     color: #2c3e50;
 }
 
-/* Cambia el color cuando están marcados */
 radiobutton:checked, checkbutton:checked {
     color: #2980b9;
     font-weight: bold;
@@ -64,7 +57,6 @@ radiobutton:checked, checkbutton:checked {
 /* =========================================
    BOTONES
    ========================================= */
-/* Botones genéricos (Añadir, Editar, Cancelar...) */
 button {
     background-color: #34495e;
     color: #ffffff;
@@ -84,52 +76,11 @@ button:active {
     background-color: #1a252f;
 }
 
-/* Botón de Acción Positiva (Ej: Guardar, Añadir) */
-button.boton-exito {
-    background-color: #2ecc71;
-}
+button.boton-exito { background-color: #2ecc71; }
+button.boton-exito:hover { background-color: #27ae60; }
 
-button.boton-exito:hover {
-    background-color: #27ae60;
-}
-
-/* Botón de Peligro (Ej: Eliminar) */
-button.boton-peligro {
-    background-color: #e74c3c;
-}
-
-button.boton-peligro:hover {
-    background-color: #c0392b;
-}
-
-/* =========================================
-   TABLAS (TreeView)
-   ========================================= */
-treeview {
-    background-color: #ffffff;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-}
-
-/* Cabecera de la tabla */
-treeview header button {
-    background-color: #e9ecef;
-    color: #495057;
-    font-weight: bold;
-    border: none;
-    border-bottom: 2px solid #ced4da;
-    padding: 10px;
-}
-
-treeview header button:hover {
-    background-color: #dde2e6;
-}
-
-/* Fila seleccionada en la tabla */
-treeview row:selected {
-    background-color: #3498db;
-    color: #ffffff;
-}
+button.boton-peligro { background-color: #e74c3c; }
+button.boton-peligro:hover { background-color: #c0392b; }
 
 /* =========================================
    MARCOS Y SEPARADORES
@@ -138,4 +89,62 @@ frame {
     border: 1px solid #ced4da;
     border-radius: 6px;
     padding: 2px;
+}
+
+/* ==========================================================================
+   TABLA DE PRODUCTOS (GtkTreeView) - ESTILO MODERNO Y CORREGIDO
+   ========================================================================== */
+
+/* 1. Estado normal (por defecto) */
+treeview.view, treeview {
+    background-color: #ffffff;
+    color: #2c3e50;
+    border: 1px solid #dce4ec;
+}
+
+/* 2. Cabeceras de las columnas */
+treeview header button {
+    background-color: #ecf0f1;
+    background-image: linear-gradient(to bottom, #f7f9f9, #ecf0f1);
+    color: #7f8c8d;
+    font-weight: bold;
+    border: none;
+    border-bottom: 1px solid #bdc3c7;
+    padding: 8px 5px;
+}
+
+treeview header button:hover {
+    background-color: #dfe6e9;
+    background-image: none;
+}
+
+/* 3. Efecto Cebra y Hover */
+treeview row:nth-child(even) { background-color: #f9fbfc; }
+treeview row:hover { background-color: #ebedef; }
+
+/* 4. Estado cuando la ventana pierde el foco (haces clic fuera) */
+treeview:backdrop {
+    background-color: #F6F6F6;
+    color: #333333;
+}
+
+/* 5. Fila seleccionada (cuando le haces clic) */
+treeview row:selected:focus {
+    background-color: #3498db;
+    color: #ffffff;
+    border-top: 1px solid #2980b9;
+    border-bottom: 1px solid #2980b9;
+}
+
+/* 6. Fila seleccionada PERO la ventana pierde el foco (Backdrop) */
+treeview row:selected:backdrop {
+    background-color: #bdc3c7;
+    color: #2c3e50;
+    border: none;
+}
+
+/* Asegurar que el color de las celdas herede correctamente */
+treeview row:selected cell {
+     background-color: inherit;
+     color: inherit;
 }

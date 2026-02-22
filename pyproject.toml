@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-xestor-inventario = "gestor_inventario.main:App"
+xestor-inventario = "gestor_inventario.main:iniciar"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/gestor_inventario"]
