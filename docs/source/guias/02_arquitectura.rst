@@ -8,7 +8,7 @@ Estructura de Carpetas
 
 * **``gestor_inventario/``**: El paquete principal.
   * **``main.py``**: Punto de entrada de la aplicación.
-  * **``configuracionBD.py``** y **``utilidades.py``**: Scripts para inicializar y localizar la base de datos de forma segura en el sistema del usuario.
+  * **``configuracionBD.py``** y **``utils.py``**: Scripts para inicializar y localizar la base de datos de forma segura en el sistema del usuario.
   * **``gui/``**: Contiene las clases de GTK3 (``ventanaPrincipal.py``, ``dialogoFormulario.py`` y ``ventanaCategorias.py``).
   * **``bd/``**: Contiene la clase principal para las consultas SQL (``conexionBD.py``).
 

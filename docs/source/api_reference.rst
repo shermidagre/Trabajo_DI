@@ -9,7 +9,7 @@ Lógica de Base de Datos y Utilidades
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: gestor_inventario.utilidades
+.. automodule:: gestor_inventario.utils
    :members:
    :undoc-members:
    :show-inheritance:

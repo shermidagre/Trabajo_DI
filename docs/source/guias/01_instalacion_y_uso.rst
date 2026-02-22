@@ -22,6 +22,6 @@ Una vez instalado, el paquete registra un comando en tu terminal. Para iniciar l
 
 .. code-block:: bash
 
-   arrancar-inventario
+   xestor-inventario
 
-Esto abrirá la ventana principal de la aplicación y creará automáticamente la base de datos ``inventario.db`` en tu carpeta de usuario (``~/.gestorInventario/``).
+Esto abrirá la ventana principal de la aplicación y creará automáticamente la base de datos ``inventario.db`` en tu carpeta de usuario (``~/.gestor_inventario/``).
