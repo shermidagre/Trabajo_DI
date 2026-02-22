@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gestor-inventario-samuel"
+version = "2.0"
+description = "Un gestor de inventario creado con GTK3 y SQLite."
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+     "PyGObject",
+]
+
+[project.scripts]
+xestor-inventario = "gestor_inventario.main:App"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/gestor_inventario"]

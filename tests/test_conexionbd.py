@@ -3,14 +3,8 @@ import unittest
 import os
 import sqlite3
 
-# Importamos la clase ConexionBD desde la ruta relativa
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src', 'mi_libreria')))
-from conexionBD import ConexionBD
-
-# Importamos la función setup_database para crear la tabla de productos
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from database_setup import setup_database
+from gestor_inventario.mi_libreria.conexionBD import ConexionBD
+from gestor_inventario.database_setup import setup_database
 
 
 class TestConexionBD(unittest.TestCase):

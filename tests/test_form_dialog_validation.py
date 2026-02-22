@@ -2,11 +2,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-# Agregamos la ruta de la librería al path para poder importarla
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from gui.form_dialog import FormDialog
+from gestor_inventario.gui.form_dialog import FormDialog
 
 
 # Mock para Gtk.Entry

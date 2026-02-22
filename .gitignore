@@ -27,3 +27,14 @@ _build/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# ==========================================
+# Secretos y credenciales (¡Súper importante!)
+# ==========================================
+token.txt
+
+# ==========================================
+# Archivos de empaquetado (PyPI)
+# ==========================================
+build/
+dist/
