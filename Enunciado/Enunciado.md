@@ -1,4 +1,3 @@
-Este é un modelo de ficheiro **README.md** profesional e estruturado para o teu proxecto. Está deseñado para ser claro, fácil de ler e para cumprir con tódolos puntos que require o enunciado do exercicio.
 
 ---
 
