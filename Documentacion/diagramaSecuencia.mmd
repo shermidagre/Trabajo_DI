@@ -1,0 +1,40 @@
+sequenceDiagram
+    actor Usuario
+    participant VP as VentanaPrincipal
+    participant DF as DialogoFormulario
+    participant BD as ConexionBD
+    participant SQLite as Base de Datos Local
+
+    Usuario->>VP: Clic en botón "Añadir"
+    VP->>DF: __init__(parent=VP, producto=None)
+    activate DF
+    DF->>BD: conectarBaseDatos()
+    BD->>SQLite: SELECT * FROM categorias
+    SQLite-->>BD: Retorna categorías
+    BD-->>DF: Diccionario de categorías
+    DF-->>VP: Muestra ventana modal (Formulario)
+
+    Usuario->>DF: Rellena datos y clic en "Guardar"
+    DF->>DF: validarDatos()
+    alt Datos Inválidos
+        DF-->>Usuario: Muestra MensajeDialog (Error)
+    else Datos Válidos
+        DF->>DF: obtenerDatos()
+        DF->>BD: conectarBaseDatos()
+        DF->>BD: engadeRexistro(INSERT INTO productos...)
+        activate BD
+        BD->>SQLite: Ejecuta Query
+        SQLite-->>BD: OK
+        BD-->>DF: Operación exitosa
+        deactivate BD
+        DF-->>VP: Retorna ResponseType.OK
+        deactivate DF
+
+        VP->>BD: conectarBaseDatos()
+        VP->>BD: consultaSenParametros(SELECT * FROM productos...)
+        BD->>SQLite: Ejecuta Query
+        SQLite-->>BD: Retorna filas actualizadas
+        BD-->>VP: Datos de productos
+        VP->>VP: Actualiza GtkListStore (TreeView)
+        VP-->>Usuario: Muestra tabla actualizada
+    end

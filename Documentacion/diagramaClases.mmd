@@ -1,0 +1,53 @@
+classDiagram
+    class App {
+        +VentanaPrincipal ventanaPrincipal
+        +__init__()
+        +cargarEstilos()
+    }
+
+    class VentanaPrincipal {
+        +GtkTreeView vistaArbol
+        +__init__()
+        +cargarDatos()
+        +alHacerClicAnadir(widget)
+        +alHacerClicEditar(widget)
+        +alHacerClicEliminar(widget)
+        +alHacerClicCategorias(widget)
+    }
+
+    class DialogoFormulario {
+        +int identificadorProducto
+        +__init__(ventanaPadre, productoSeleccionado)
+        +cargarCategorias()
+        +obtenerDatos()
+        +validarDatos()
+    }
+
+    class VentanaCategorias {
+        +GtkTreeView vistaArbol
+        +__init__(ventanaPadre)
+        +cargarDatos()
+        +alHacerClicAnadir(widget)
+    }
+
+    class ConexionBD {
+        +String rutaBaseDatos
+        +Connection conexionActiva
+        +Cursor cursorActivo
+        +__init__(rutaBaseDatos)
+        +conectarBaseDatos()
+        +crearCursor()
+        +consultaSenParametros(sql)
+        +engadeRexistro(sql, args)
+        +actualizaRexistro(sql, args)
+        +eliminarRegistro(sql, args)
+        +cerrarBaseDatos()
+    }
+
+    %% Relaciones
+    App "1" *-- "1" VentanaPrincipal : Inicializa
+    VentanaPrincipal "1" ..> "*" DialogoFormulario : Abre
+    VentanaPrincipal "1" ..> "1" VentanaCategorias : Abre
+    VentanaPrincipal ..> ConexionBD : Usa
+    DialogoFormulario ..> ConexionBD : Usa
+    VentanaCategorias ..> ConexionBD : Usa
