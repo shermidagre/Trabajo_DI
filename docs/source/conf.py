@@ -51,5 +51,13 @@ html_static_path = ['_static']
 # If true, `todo` and `todoifnot` produce output, else they produce nothing.
 todo_include_todos = True
 
-# Finge que esta librería existe para que no dé error al documentar en Windows
-autodoc_mock_imports = ["gi"]
+autodoc_mock_imports = [
+    "gi",
+    "gi.repository",
+    "gi.repository.Gtk",
+    "gi.repository.Gdk",
+    "gestor_inventario.bd", # Opcional: mockea también la BD si da problemas
+]
+# Ocultar las advertencias de objetos simulados (mocked)
+autodoc_warningiserror = False
+suppress_warnings = ['autodoc.mocked_object']

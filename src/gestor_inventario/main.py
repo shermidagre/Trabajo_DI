@@ -1,7 +1,10 @@
 import gi
 import os
+import sys
 
-gi.require_version('Gtk', '3.0')
+if 'sphinx' not in sys.modules:
+    gi.require_version('Gtk', '3.0')
+
 from gi.repository import Gtk, Gdk
 
 from gestor_inventario.bd.conexionBD import ConexionBD
