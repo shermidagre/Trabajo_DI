@@ -4,17 +4,17 @@ Referencia de la API
 Lógica de Base de Datos y Utilidades
 ------------------------------------
 
-.. automodule:: gestorInventario.configuracionBD
+.. automodule:: gestor_inventario.configuracionBD
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: gestorInventario.utilidades
+.. automodule:: gestor_inventario.utilidades
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: gestorInventario.miLibreria.conexionBD
+.. automodule:: gestor_inventario.bd.conexionBD
    :members:
    :undoc-members:
    :show-inheritance:
@@ -22,17 +22,17 @@ Lógica de Base de Datos y Utilidades
 Interfaz Gráfica (GUI)
 ----------------------
 
-.. automodule:: gestorInventario.gui.ventanaPrincipal
+.. automodule:: gestor_inventario.gui.ventanaPrincipal
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: gestorInventario.gui.dialogoFormulario
+.. automodule:: gestor_inventario.gui.dialogoFormulario
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: gestorInventario.gui.ventanaCategorias
+.. automodule:: gestor_inventario.gui.ventanaCategorias
    :members:
    :undoc-members:
    :show-inheritance:
@@ -40,7 +40,7 @@ Interfaz Gráfica (GUI)
 Punto de Entrada
 ----------------
 
-.. automodule:: gestorInventario.principal
+.. automodule:: gestor_inventario.main
    :members:
    :undoc-members:
    :show-inheritance:

@@ -4,13 +4,13 @@ import os
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
-from gestor_inventario.miLibreria.conexionBD import ConexionBD
+from gestor_inventario.bd.conexionBD import ConexionBD
 from gestor_inventario.gui.ventanaPrincipal import VentanaPrincipal
 from gestor_inventario.configuracionBD import configurarBaseDatos
 from gestor_inventario.utils import obtenerRutaBaseDatos
 
 
-class Aplicacion:
+class App:
     """Clase principal de la aplicación que inicializa la base de datos, carga estilos y abre la ventana."""
 
     def __init__(self):
