@@ -30,6 +30,7 @@ extensions = [
     'sphinx.ext.napoleon',    # Para soportar docstrings de Google y NumPy.
     'sphinx.ext.viewcode',    # Para enlazar la documentación con el código fuente.
     'sphinx.ext.todo',        # Para usar la directiva '.. todo::'.
+    'sphinx_rtd_theme',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -46,23 +47,19 @@ language = 'es'
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-#
-html_theme = "furo"
+html_theme = "sphinx_rtd_theme"
 
 html_theme_options = {
-    "sidebar_hide_name": False,
-    "navigation_with_keys": True,
-    # Puedes personalizar colores específicos aquí
-    "light_css_variables": {
-        "color-brand-primary": "#2980b9",
-        "color-brand-content": "#2980b9",
-    },
-    "dark_css_variables": {
-        "color-brand-primary": "#3498db",
-        "color-brand-content": "#3498db",
-    },
+    'logo_only': False,
+    'display_version': True,
+    'prev_next_buttons_location': 'bottom',
+    'style_external_links': True,
+    # Color de la cabecera lateral (un azul profesional para tu gestor)
+    'style_nav_header_background': '#2980b9',
+    'collapse_navigation': False,
+    'sticky_navigation': True,
+    'navigation_depth': 4,
 }
-
 html_static_path = ['_static']
 
 # -- Options for todo extension ----------------------------------------------
