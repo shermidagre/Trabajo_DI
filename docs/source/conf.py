@@ -60,6 +60,9 @@ html_theme_options = {
     'sticky_navigation': True,
     'navigation_depth': 4,
 }
+
+# logo en docs/source/_static/logo.png
+html_logo = "_static/logo.png"
 html_static_path = ['_static']
 
 # -- Options for todo extension ----------------------------------------------
