@@ -18,6 +18,7 @@ Un sistema de gestión de inventario de escritorio, limpio y eficiente, desarrol
 Puedes consultar la documentación detallada de la API, clases y métodos, generada con **Sphinx**, en el siguiente enlace:
 
 👉 **[gestor-inventario-samuel.readthedocs.io](https://www.google.com/search?q=https://gestor-inventario-samuel.readthedocs.io/es/latest/)**
+👉 **[gestor-inventario-samuel.github](https://github.com/shermidagre/Trabajo_DI)**
 
 ## 🛠️ Requisitos Previos
 

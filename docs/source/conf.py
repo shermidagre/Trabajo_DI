@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 project = 'Gestor de Inventario'
 copyright = '2026, Samuel'
 author = 'Samuel'
-version = '3.0'
-release = '3.0'
+version = '4.0'
+release = '4.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
