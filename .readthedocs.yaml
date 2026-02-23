@@ -11,9 +11,5 @@ sphinx:
 
 python:
   install:
-    # Primero instalamos los requisitos de documentación
+    # Instalamos solo lo necesario para generar los HTML
     - requirements: docs/requirements.txt
-    # Luego instalamos el paquete en modo editable sin dependencias pesadas
-    - method: pip
-      path: .
-      extra_requirements: []
