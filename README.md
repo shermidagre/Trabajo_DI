@@ -56,6 +56,16 @@ python -m unittest discover tests/
 
 ```
 
+## Buildeo
+
+```bash
+
+py -m build
+
+py -m twine upload dist/*
+
+```
+
 ## 📊 Arquitectura del Sistema
 
 ### 1. Diagrama de Clases
