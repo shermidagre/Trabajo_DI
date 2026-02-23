@@ -11,8 +11,9 @@ sphinx:
 
 python:
   install:
-    # Cambiamos a instalación "falsa" para documentación
+    # Primero instalamos los requisitos de documentación
+    - requirements: docs/requirements.txt
+    # Luego instalamos el paquete en modo editable sin dependencias pesadas
     - method: pip
       path: .
       extra_requirements: []
-  requirements: docs/requirements.txt
