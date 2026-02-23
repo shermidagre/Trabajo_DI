@@ -30,7 +30,6 @@ extensions = [
     'sphinx.ext.napoleon',    # Para soportar docstrings de Google y NumPy.
     'sphinx.ext.viewcode',    # Para enlazar la documentación con el código fuente.
     'sphinx.ext.todo',        # Para usar la directiva '.. todo::'.
-    'furo',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
