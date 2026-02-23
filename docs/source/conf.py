@@ -16,8 +16,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 project = 'Gestor de Inventario'
 copyright = '2026, Samuel'
 author = 'Samuel'
-version = '1.0'
-release = '1.0'
+version = '3.0'
+release = '3.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -56,7 +56,8 @@ autodoc_mock_imports = [
     "gi.repository",
     "gi.repository.Gtk",
     "gi.repository.Gdk",
-    "gestor_inventario.bd", # Opcional: mockea también la BD si da problemas
+    "gestor_inventario.bd",
+    "PyGObject",
 ]
 # Ocultar las advertencias de objetos simulados (mocked)
 autodoc_warningiserror = False
